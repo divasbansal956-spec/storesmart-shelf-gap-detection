@@ -1,10 +1,18 @@
 # Shelf Gap Detection & Stock Alerts
 
-Real-time shelf monitoring for retail: a phone camera watches shelf slots,
-detects when a product is missing using computer vision, and cross-references
-a stock database to tell a store manager exactly what to do about it —
-refill from the storeroom, reorder from the distributor, or investigate a
-shrinkage/stock mismatch.
+An edge-deployable computer-vision pipeline for retail shelf monitoring:
+a camera watches shelf slots, detects when a product is missing, and
+cross-references a stock database to tell a store manager exactly what to
+do about it — refill from the storeroom, reorder from the distributor, or
+investigate a shrinkage/stock mismatch. Designed to run on constrained edge
+hardware (Raspberry Pi class devices, targeting a Qualcomm QCS6490 NPU in
+production) rather than sending video to the cloud — no frame is ever
+written to disk or transmitted; only small JSON events leave the pipeline.
+
+Prototyped and demonstrated using an Android phone in IP-camera mode as a
+stand-in for a mounted shelf camera, polled over the local network exactly
+as a fixed edge camera would be — swapping in real camera hardware requires
+no change to the detection or alerting code below.
 
 Built as my independent module (Phase 3 of 4) within **StoreSmart**, a
 5-person hackathon project for Smart India Hackathon. Full team repo:
