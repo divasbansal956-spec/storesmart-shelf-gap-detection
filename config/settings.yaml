@@ -1,0 +1,40 @@
+# Shared settings for all StoreSmart modules.
+
+detector:
+  model: yolov8n.pt
+  conf: 0.35
+  imgsz: 640
+  device: null  # null = auto (mps on Apple Silicon, else cpu)
+
+privacy:
+  default_view: blurred        # blurred | zero-frame | raw (raw is setup-only)
+  small_count_suppression_k: 2 # demo value; production default is 5
+  position_retention_s: 300    # prune 'position' events older than this
+
+footfall:
+  window_s: 30
+  threshold_wait_s: 12
+  horizon_s: 10
+  join_prob: 1.0
+  hold_s: 3
+  default_service_s: 6
+  min_service_s: 1.0
+  buffer_px: 40  # width (px) of the no-man's-land band around the entry line
+  lost_after_s: 1.5
+  max_group_size: 4  # cap on how many people one merged detection box can count as
+
+shelf:
+  empty_threshold_pct: 60
+  low_threshold_pct: 30
+  confirm_frames: 2
+
+dwell:
+  enter_delay_s: 2
+  exit_delay_s: 2
+  passing_max_s: 3
+  glance_max_s: 10
+  zone_expand_ft: 1.5
+  grid_ft: 1
+
+alerts:
+  dedupe_window_min: 15

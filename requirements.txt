@@ -1,0 +1,31 @@
+ultralytics==8.3.40
+opencv-python==4.10.0.84
+numpy==1.26.4
+pydantic==2.9.2
+pyyaml==6.0.2
+lap==0.5.12
+# COUPLED PIN — bump these two together or not at all.
+#
+# streamlit-drawable-canvas 0.9.3 calls the PRIVATE Streamlit helper
+# streamlit.elements.image.image_to_url when a canvas background image is set
+# (the Store Map floor plan). Streamlit moved that helper to
+# streamlit.elements.lib.image_utils AND changed its signature
+# (width: int -> layout_config: LayoutConfig) after 1.39, so on a newer
+# Streamlit the Store Map page dies with
+#   AttributeError: module 'streamlit.elements.image' has no attribute 'image_to_url'
+# as soon as a floor plan is loaded. Aliasing the moved function is NOT a fix:
+# the signature differs, so the call would still be wrong.
+#
+# To move forward instead: canvas >= 0.10 needs streamlit >= 1.53 and drops the
+# private-API use entirely, but it returns capitalised fabric type names
+# ("Rect"/"Line" instead of "rect"/"line"), so the object parsing in
+# storesmart/dashboard/pages/2_Store_Map.py must be updated in the same change
+# or shapes will silently stop registering. Verified: canvas 0.13.0 needs
+# streamlit >= 1.63 in practice, not the 1.53 its metadata claims.
+streamlit==1.39.0
+streamlit-drawable-canvas==0.9.3
+streamlit-image-coordinates==0.1.9
+pandas==2.2.3
+matplotlib==3.9.2
+requests==2.32.3
+pytest==8.3.3
